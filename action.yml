@@ -1,0 +1,26 @@
+name: "Issue Minimum Response Time"
+description: "Label issues that have exceeded minimum response time."
+author: "Lucas Hanson"
+inputs:
+  exempt_user_list: 
+    required: false 
+    default: ''
+    description: List of github usernames to ignore comments from. (comma separated) 
+  token:
+    required: true
+    description: Repo Token
+  exempt_labels:
+    required: false
+    default: ''
+    description: List of labels to make an issue exempt from processing.
+  label:
+    required: false
+    default: 'needs-triage'
+    description: Label to add to issue that need a response.
+  minimum_response_time:
+    required: false
+    default: 5
+    description: Minimum response time in days.
+runs:
+  using: "docker"
+  image: "Dockerfile"
