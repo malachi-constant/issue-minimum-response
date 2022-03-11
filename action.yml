@@ -20,7 +20,7 @@ inputs:
   minimum_response_time:
     required: false
     default: 5
-    description: Minimum response time in days.
+    description: Minimum response time in days. Set to '0' to immmediately process issues.
 runs:
   using: "docker"
   image: "Dockerfile"

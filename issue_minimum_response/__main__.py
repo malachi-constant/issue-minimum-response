@@ -53,7 +53,7 @@ def main():
         _logger.debug(
             f"issue: #{issue.number} is {(current_time - issue.created_at).days} days old"
         )
-        if issue_age >= minimum_response_time:
+        if issue_age >= minimum_response_time or issue_age == 0:
             if needs_response(issue):
                 label_issue(issue, needs_response_label=needs_response_label)
 
