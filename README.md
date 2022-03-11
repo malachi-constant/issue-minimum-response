@@ -18,7 +18,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Run Action
-        uses: ./
+        uses: malachi-constant/issue-minimum-response@latest
         with:
           exempt_user_list: "github-actions[bot]"
           exempt_labels: "help wanted"
