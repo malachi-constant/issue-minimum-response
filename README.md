@@ -5,7 +5,7 @@
 
 ## Usage
 
-## Recommended permissions
+### Recommended permissions
 
 For the execution of this action, it must be able to fetch all issues from your repository.  
 In addition, based on the provided configuration, the action could require more permission(s) (e.g.: add label, remove label, etc).  
