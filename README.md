@@ -5,6 +5,16 @@
 
 ## Usage
 
+## Recommended permissions
+
+For the execution of this action, it must be able to fetch all issues from your repository.  
+In addition, based on the provided configuration, the action could require more permission(s) (e.g.: add label, remove label, etc).  
+This can be achieved with the following [configuration in the action](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#permissions) if the permissions are restricted:
+
+```yaml
+permissions:
+  issues: write
+```
 
 ### Example workflow
 
