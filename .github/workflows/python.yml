@@ -14,7 +14,8 @@ jobs:
 
       - name: Lint
         run: |
-          pip install black isort
+          pip install black isort flake8
           isort --check .
           black --check .
+          flake8 .
 

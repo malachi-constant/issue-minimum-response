@@ -21,6 +21,10 @@ inputs:
     required: false
     default: 5
     description: Minimum response time in days. Set to '0' to immmediately process issues.
+  debug:
+    required: false
+    default: 'false'
+    description: Enable 'dry-run' mode.
 runs:
   using: "docker"
   image: "Dockerfile"
