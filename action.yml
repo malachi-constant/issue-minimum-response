@@ -13,6 +13,10 @@ inputs:
     required: false
     default: ''
     description: List of labels to make an issue exempt from processing.
+  exempt_authors:
+    required: false
+    default: ''
+    description: List of github logins to make an issue exempt from processing when author is in the list.
   label:
     required: false
     default: 'needs-triage'

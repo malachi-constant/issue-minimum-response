@@ -13,6 +13,7 @@ exempt_labels: List[str] = os.environ.get("INPUT_EXEMPT_LABELS").split(",")
 gh: Github = Github(os.environ.get("INPUT_TOKEN"))
 minimum_response_time: int = int(os.environ.get("INPUT_MINIMUM_RESPONSE_TIME"))  # days
 needs_response_label: str = os.environ.get("INPUT_LABEL")
+exempt_authors: List[str] = os.environ.get("INPUT_EXEMPT_AUTHORS").split(",")
 repo = gh.get_repo(os.environ.get("GITHUB_REPOSITORY"))
 
 # logging mode
@@ -37,15 +38,18 @@ def _label_issue(
             )
             return
     issue.add_to_labels(needs_response_label) if not debug_mode else _logger.info(
-        f"*** #{issue.number} would be labeled with label: {label} if it doesn't already exist"
+        f"*** #{issue.number} would be labeled with label: {needs_response_label} if it doesn't already exist"
     )
     labeled_issues.append(issue.number)
 
 
-def _needs_response(issue) -> bool:
+def _needs_response(issue, exempt_authors: List[str] = []) -> bool:
     """determine if issue has had comments from another user besides the original poster"""
 
     _logger.info(f"issue author: {issue.user.login}")
+    if issue.user.login in exempt_authors:
+        _logger.info(f"issue author is in exempt list")
+        return False
     for comment in issue.get_comments():
         _logger.info(f"comment user: {comment.user.login}")
         if (
@@ -87,7 +91,7 @@ def main():
             f"issue: #{issue.number} is {(current_time - issue.created_at).days} days old"
         )
         if issue_age >= minimum_response_time or minimum_response_time == 0:
-            if _needs_response(issue):
+            if _needs_response(issue, exempt_authors):
                 _label_issue(
                     issue,
                     needs_response_label=needs_response_label,

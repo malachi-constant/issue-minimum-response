@@ -38,35 +38,42 @@ jobs:
 
 ### Inputs
 
+```yaml
 exempt_user_list: 
-    required: false 
-    default: ''
-    description: List of github usernames to ignore comments from. (comma separated) 
-  token:
-    required: true
-    description: Repo Token
-  exempt_labels:
-    required: false
-    default: ''
-    description: List of labels to make an issue exempt from processing.
-  label:
-    required: false
-    default: 'needs-triage'
-    description: Label to add to issue that need a response.
-  minimum_response_time:
-    required: false
-    default: 5
-    description: Minimum response time in days. Set to '0' to immmediately process issues.
-  debug:
-    required: false
-    default: 'false'
-    description: Enable 'dry-run' mode.
+  required: false 
+  default: ''
+  description: List of github usernames to ignore comments from. (comma separated) 
+token:
+  required: true
+  description: Repo Token
+exempt_labels:
+  required: false
+  default: ''
+  description: List of labels to make an issue exempt from processing.
+exempt_authors:
+  required: false
+  default: ''
+  description: List of github logins to make an issue exempt from processing when author is in the list.
+label:
+  required: false
+  default: 'needs-triage'
+  description: Label to add to issue that need a response.
+minimum_response_time:
+  required: false
+  default: 5
+  description: Minimum response time in days. Set to '0' to immmediately process issues.
+debug:
+  required: false
+  default: 'false'
+  description: Enable 'dry-run' mode.
+```
 
 | Input                                             | Description                                        |
 |------------------------------------------------------|-----------------------------------------------|
 | `token` | API Token with permissions to read and write github issues & labels |
 | `exempt_user_list` _(optional)_  | List of github usernames to ignore comments from. (comma separated) |
 | `exempt_labels` _(optional)_  | List of labels to make an issue exempt from processing. (comma separated) |
+| `exempt_authors` _(optional)_  | List of github logins to make an issue exempt from processing when author is in the list. (comma separated) |
 | `label` _(optional)_  | Label to add to issue that need a response. Default: `needs-triage` |
 | `minimum_response_time` _(optional)_  | Minimum response time in days. Set to '0' to immmediately process issues. Default: `5` |
 | `debug` _(optional)_  | Enable 'dry-run' mode.. Default: `false` |
