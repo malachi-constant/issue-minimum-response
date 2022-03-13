@@ -48,7 +48,7 @@ def _needs_response(issue, exempt_authors: List[str] = []) -> bool:
 
     _logger.info(f"issue author: {issue.user.login}")
     if issue.user.login in exempt_authors:
-        _logger.info(f"issue author is in exempt list")
+        _logger.info("issue author is in exempt list")
         return False
     for comment in issue.get_comments():
         _logger.info(f"comment user: {comment.user.login}")
