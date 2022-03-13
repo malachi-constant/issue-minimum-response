@@ -70,6 +70,7 @@ def _print_config() -> None:
         "Minimum Response Time": minimum_response_time,
         "Exempt User List": exempt_user_list,
         "Exempt Labels": exempt_labels,
+        "Exempt Authors": exempt_authors,
         "Repo": repo.name,
         "Debug Mode": debug_mode,
     }
