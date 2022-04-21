@@ -15,7 +15,7 @@ minimum_response_time: int = int(os.environ.get("INPUT_MINIMUM_RESPONSE_TIME")) 
 needs_response_label: str = os.environ.get("INPUT_LABEL")
 exempt_authors: List[str] = os.environ.get("INPUT_EXEMPT_AUTHORS").split(",")
 exempt_assigned_issues: bool = (
-    False if os.environ.get("INPUT_EXEMPT_ASSIGNED_ISSUES").lower() == False else True
+    False if os.environ.get("INPUT_EXEMPT_ASSIGNED_ISSUES").lower() == "false" else True
 )
 repo = gh.get_repo(os.environ.get("GITHUB_REPOSITORY"))
 
