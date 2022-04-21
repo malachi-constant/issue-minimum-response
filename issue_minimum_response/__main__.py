@@ -94,15 +94,11 @@ def main():
     open_issues = repo.get_issues(state="open")
     _print_config()
     for issue in open_issues:
-        print(issue)
         _logger.info(line_break)
         issue_age = (current_time - issue.created_at).days
         _logger.info(
             f"issue: #{issue.number} is {(current_time - issue.created_at).days} days old"
         )
-        #### debug
-        print(f"issue: #{issue.number} assignee: {issue.assignee}")
-        #####
 
         if issue_age >= minimum_response_time or minimum_response_time == 0:
             if _needs_response(
