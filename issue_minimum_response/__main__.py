@@ -14,6 +14,7 @@ gh: Github = Github(os.environ.get("INPUT_TOKEN"))
 minimum_response_time: int = int(os.environ.get("INPUT_MINIMUM_RESPONSE_TIME"))  # days
 needs_response_label: str = os.environ.get("INPUT_LABEL")
 exempt_authors: List[str] = os.environ.get("INPUT_EXEMPT_AUTHORS").split(",")
+exempt_assigned_issues: bool = False if os.environ.get("INPUT_EXEMPT_ASSIGNED_ISSUES").lower() == False else True
 repo = gh.get_repo(os.environ.get("GITHUB_REPOSITORY"))
 
 # logging mode
@@ -43,12 +44,15 @@ def _label_issue(
     labeled_issues.append(issue.number)
 
 
-def _needs_response(issue, exempt_authors: List[str] = []) -> bool:
+def _needs_response(issue, exempt_authors: List[str] = [], make_assigned_issues_exempt: bool = True) -> bool:
     """determine if issue has had comments from another user besides the original poster"""
 
     _logger.info(f"issue author: {issue.user.login}")
     if issue.user.login in exempt_authors:
         _logger.info("issue author is in exempt list")
+        return False
+    if issue.assignee and make_assigned_issues_exempt:
+        _logger.info("issue is assigned ")
         return False
     for comment in issue.get_comments():
         _logger.info(f"comment user: {comment.user.login}")
@@ -86,13 +90,18 @@ def main():
     open_issues = repo.get_issues(state="open")
     _print_config()
     for issue in open_issues:
+        print(issue)
         _logger.info(line_break)
         issue_age = (current_time - issue.created_at).days
         _logger.info(
             f"issue: #{issue.number} is {(current_time - issue.created_at).days} days old"
         )
+        #### debug 
+        print(f"issue: #{issue.number} assignee: {issue.assignee}")
+        #####
+
         if issue_age >= minimum_response_time or minimum_response_time == 0:
-            if _needs_response(issue, exempt_authors):
+            if _needs_response(issue, exempt_authors, make_assigned_issues_exempt=exempt_assigned_issues):
                 _label_issue(
                     issue,
                     needs_response_label=needs_response_label,

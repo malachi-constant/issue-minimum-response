@@ -54,6 +54,10 @@ exempt_authors:
   required: false
   default: ''
   description: List of github logins to make an issue exempt from processing when author is in the list.
+exempt_assigned_issues:
+    required: false
+    default: 'true'
+    description: Ignore issues that are already assigned.
 label:
   required: false
   default: 'needs-triage'
@@ -74,6 +78,7 @@ debug:
 | `exempt_user_list` _(optional)_  | List of github usernames to ignore comments from. (comma separated) |
 | `exempt_labels` _(optional)_  | List of labels to make an issue exempt from processing. (comma separated) |
 | `exempt_authors` _(optional)_  | List of github logins to make an issue exempt from processing when author is in the list. (comma separated) |
+| `exempt_assigned_issues` _(optional)_  | Ignore issues that are already assigned. Default: `true` |
 | `label` _(optional)_  | Label to add to issue that need a response. Default: `needs-triage` |
 | `minimum_response_time` _(optional)_  | Minimum response time in days. Set to '0' to immmediately process issues. Default: `5` |
 | `debug` _(optional)_  | Enable 'dry-run' mode.. Default: `false` |
