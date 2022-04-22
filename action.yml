@@ -17,6 +17,10 @@ inputs:
     required: false
     default: ''
     description: List of github logins to make an issue exempt from processing when author is in the list.
+  exempt_assigned_issues:
+    required: false
+    default: 'true'
+    description: Ignore issues that are already assigned.
   label:
     required: false
     default: 'needs-triage'
