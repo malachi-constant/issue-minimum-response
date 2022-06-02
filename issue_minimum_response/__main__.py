@@ -58,6 +58,9 @@ def _needs_response(
     if issue.assignee and make_assigned_issues_exempt:
         _logger.info("issue is assigned ")
         return False
+    if issue.pull_request:
+        _logger.info("pull request")
+        return False
     for comment in issue.get_comments():
         _logger.info(f"comment user: {comment.user.login}")
         if (
