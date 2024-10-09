@@ -40,8 +40,12 @@ def _label_issue(
                 f"issue not to be labeled as it is exempt due to label: {label.name}"
             )
             return
-    issue.add_to_labels(needs_response_label) if not debug_mode else _logger.info(
-        f"*** #{issue.number} would be labeled with label: {needs_response_label} if it doesn't already exist"
+    (
+        issue.add_to_labels(needs_response_label)
+        if not debug_mode
+        else _logger.info(
+            f"*** #{issue.number} would be labeled with label: {needs_response_label} if it doesn't already exist"
+        )
     )
     labeled_issues.append(issue.number)
 
